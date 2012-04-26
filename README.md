@@ -1,7 +1,8 @@
 Post Recommendations for WordPress
 ==================================
 
-jQuery-powered recommendations. At the end of a post (or anywhere), generates a list of *related posts* (by author or category). 
+jQuery-powered recommendations. 
+
 
 How to use:
 
