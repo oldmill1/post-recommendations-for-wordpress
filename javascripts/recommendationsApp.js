@@ -119,10 +119,14 @@
 					load.hide();  
 				},
 				'json'
-			);
-					
+			);	
 		}
 	); // form.submit()
+	
+	posts.click( function() { 
+		var src = $(this).find("a").attr('href');
+		window.location = src; 
+	}); 
 
 })( jQuery ); 
 	

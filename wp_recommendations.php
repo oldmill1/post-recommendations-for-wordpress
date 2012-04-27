@@ -90,7 +90,14 @@ function recommend_something_func( $atts ) {
 			'orderby' => 'rand', 
 			'show' => false
 		), $atts ) );
-	
+		
+	// if size is set, convert it to an array 
+	if ( ! is_null($size) ) { 
+		$size = explode(",", $size, 2 );
+		$size[0] = intval($size[0]); 
+		$size[1] = intval($size[1]); 
+	} 
+		
 	$args = array( 
 		'postID' => $post_id,
 		'size' => $size,  
