@@ -32,11 +32,22 @@
 
 <h2>Usage</h2>
 
+<p>As a <a href="http://codex.wordpress.org/Template_Tags">template tag</a></p>
+
 <div class="highlight">
 <pre><span class="x">$args = array(); </span>
 <span class="x">wp_recommendations($args); </span>
 </pre>
 </div>
+
+<p>As a <a href="http://codex.wordpress.org/Shortcode">shortcode</a></p>
+
+<div class="highlight">
+<pre><span class="x">[recommend_posts_for_me]</span>
+</pre>
+</div>
+
+<p><em style="color: red">Important:</em> Some arguments differ slightly depending on if you're using the template tag or the shortcode. See <a href="#options">options</a> below for more details.</p>
 
 <br />
 <h2 id="options">Options</h2>
@@ -48,14 +59,16 @@
 		<dd>
 			<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#String">(string)</a> (optional)&#8212; Get recommendations from the post id being passed.
 			<br />Default: The current post's id</p>
+			<p><em style="color: red">Important:</em> When passing this in the short code, you must pass it like this: post_id=123</p>
 		</dd>
 		
 		<dt>
 			<p>$size</p>
 		</dt>
 		<dd>
-			<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#Array">(array)</a> (optional)&#8212; A two-item array containg with the width and height. Note: <code>build_recommendations()</code> uses <strong>$size</strong> to make the images, and the default size it uses is 100 by 50. 
+			<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#Array">(array)</a> (optional)&#8212; A two-item array containg with the width and height.
 			<br />Default: null</p>
+			<p><em style="color: red">Important:</em> When passing this in the short code, you must pass it like this: size=100,100</p>
 		</dd>
 		
 		<dt>
@@ -78,22 +91,13 @@
 			<p>$show</p>
 		</dt>
 		<dd>
-			<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#Boolean">(bool)</a> (optional)&#8212; You may choose to store the DOM structure of the generated recommendations in a PHP variable by setting this peramter to false.   
+			<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#Boolean">(bool)</a> (optional)&#8212; You may choose to store the DOM structure in a PHP variable by setting this property to false.   
 			<br />Default: true</p>
+			<p><em style="color: red">Important:</em> If you're using shortcodes, you may ignore this value.</p>
 		</dd>
 	</dl>
 
 <br />
-<h2>Methods</h2>
-	
-	<dl id="methods">
-		<dt>
-			<p>wp_recommendations( $array_with_options )</p>
-		</dt>
-		<dd>
-			<p>Generates the javascript, css and html for the recommendations. Takes an array of options; for a list, <a href="#options">click here.</a></p>
-		</dd>
-	</dl>
 	
 
       </section>
