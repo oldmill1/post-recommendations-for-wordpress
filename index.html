@@ -29,9 +29,8 @@
 
 <p>jQuery-powered recommendations. </p>
 
-<p>How to use:</p>
 
-<p>Put this code inside <strong>single.php</strong>, or anywhere you want. </p>
+<h2>Usage</h2>
 
 <div class="highlight">
 <pre><span class="x">$args = array(); </span>
@@ -40,18 +39,49 @@
 </div>
 
 
-<p>Here are the options: </p>
+<h2>Options</h2>
 
-<div class="highlight">
-<pre><span class="x">$defaults = array( </span>
-<span class="x">    'postID' =&gt; $post-&gt;ID,</span>
-<span class="x">    'size' =&gt; null,  </span>
-<span class="x">    'numberposts' =&gt; 6, </span>
-<span class="x">    'orderby' =&gt; 'rand', </span>
-<span class="x">    'show' =&gt; TRUE</span>
-<span class="x">); </span>
-</pre>
-</div>
+<dl>
+	<dt>
+		<p>$postID</p>
+	</dt>
+	<dd>
+		<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#String">(string)</a> (optional)&#8212; Get recommendations from the post id being passed.
+		<br />Default: The current post's ID</p>
+	</dd>
+	
+	<dt>
+		<p>$size</p>
+	</dt>
+	<dd>
+		<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#Array">(array)</a> (optional)&#8212; A two-item array containg the width and height of the images being generated, in the format (w, h). 
+		<br />Default: null</p>
+	</dd>
+	
+	<dt>
+		<p>$numberposts</p>
+	</dt>
+	<dd>
+		<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#Integer">(integer)</a> (optional)&#8212; The number of recommendations to generate.  
+		<br />Default: 6</p>
+	</dd>
+	
+	<dt>
+		<p>$orderby</p>
+	</dt>
+	<dd>
+		<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#String">(string)</a> (optional)&#8212; <a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters">The post order.</a>   
+		<br />Default: rand</p>
+	</dd>
+	
+	<dt>
+		<p>$show</p>
+	</dt>
+	<dd>
+		<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#Boolean">(bool)</a> (optional)&#8212; You may choose to store the DOM structure of the generated recommendations in a PHP variable by setting this peramter to false.   
+		<br />Default: true</p>
+	</dd>
+</dl>
 
       </section>
       <footer>
