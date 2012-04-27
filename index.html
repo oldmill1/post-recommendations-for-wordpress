@@ -38,50 +38,63 @@
 </pre>
 </div>
 
+<br />
+<h2 id="options">Options</h2>
 
-<h2>Options</h2>
+	<dl>
+		<dt>
+			<p>$postID</p>
+		</dt>
+		<dd>
+			<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#String">(string)</a> (optional)&#8212; Get recommendations from the post id being passed.
+			<br />Default: The current post's id</p>
+		</dd>
+		
+		<dt>
+			<p>$size</p>
+		</dt>
+		<dd>
+			<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#Array">(array)</a> (optional)&#8212; A two-item array containg with the width and height. Note: <code>build_recommendations()</code> uses <strong>$size</strong> to make the images, and the default size it uses is 100 by 50. 
+			<br />Default: null</p>
+		</dd>
+		
+		<dt>
+			<p>$numberposts</p>
+		</dt>
+		<dd>
+			<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#Integer">(integer)</a> (optional)&#8212; The number of recommendations to generate.  
+			<br />Default: 6</p>
+		</dd>
+		
+		<dt>
+			<p>$orderby</p>
+		</dt>
+		<dd>
+			<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#String">(string)</a> (optional)&#8212; <a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters">The post order.</a>   
+			<br />Default: rand</p>
+		</dd>
+		
+		<dt>
+			<p>$show</p>
+		</dt>
+		<dd>
+			<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#Boolean">(bool)</a> (optional)&#8212; You may choose to store the DOM structure of the generated recommendations in a PHP variable by setting this peramter to false.   
+			<br />Default: true</p>
+		</dd>
+	</dl>
 
-<dl>
-	<dt>
-		<p>$postID</p>
-	</dt>
-	<dd>
-		<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#String">(string)</a> (optional)&#8212; Get recommendations from the post id being passed.
-		<br />Default: The current post's ID</p>
-	</dd>
+<br />
+<h2>Methods</h2>
 	
-	<dt>
-		<p>$size</p>
-	</dt>
-	<dd>
-		<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#Array">(array)</a> (optional)&#8212; A two-item array containg the width and height of the images being generated, in the format (w, h). 
-		<br />Default: null</p>
-	</dd>
+	<dl id="methods">
+		<dt>
+			<p>wp_recommendations( $array_with_options )</p>
+		</dt>
+		<dd>
+			<p>Generates the javascript, css and html for the recommendations. Takes an array of options; for a list, <a href="#options">click here.</a></p>
+		</dd>
+	</dl>
 	
-	<dt>
-		<p>$numberposts</p>
-	</dt>
-	<dd>
-		<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#Integer">(integer)</a> (optional)&#8212; The number of recommendations to generate.  
-		<br />Default: 6</p>
-	</dd>
-	
-	<dt>
-		<p>$orderby</p>
-	</dt>
-	<dd>
-		<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#String">(string)</a> (optional)&#8212; <a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters">The post order.</a>   
-		<br />Default: rand</p>
-	</dd>
-	
-	<dt>
-		<p>$show</p>
-	</dt>
-	<dd>
-		<p><a rel="nofollow" href="http://codex.wordpress.org/How_to_Pass_Tag_Parameters#Boolean">(bool)</a> (optional)&#8212; You may choose to store the DOM structure of the generated recommendations in a PHP variable by setting this peramter to false.   
-		<br />Default: true</p>
-	</dd>
-</dl>
 
       </section>
       <footer>
