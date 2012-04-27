@@ -7,6 +7,8 @@
 	var form = $('#wp-recommendations-form'); 
 	var select = $('#wp-recommendations-form select'); 
 	
+	var load = $('img.load'); 
+	
 	var recommendationsApp = {
 		init: function() { 
 			titles.addClass('wp-recommendations-meta-surpress'); 
@@ -22,7 +24,7 @@
 		},
 		
 		clear: function() { 
-				posts.hide( 'drop', {}, 500 ); 	 
+				wrapper.empty(); 	 
 		}, 		
 		
 		make: function( post ) { 
@@ -83,21 +85,27 @@
 		function(event) { 
 			event.preventDefault(); 
 			
+			
+			load.show(); 
+			
 			// discover what's being requested
 			var selected = select.val(); 
 			var selObj = select.find("option[value='"+selected+"']");
+		
 			
 			// the data object
 			var data = { 
 				'action': 'get_posts', 
 				'type': selObj.attr('value'), 
 				'id': selObj.attr('id'),
-				'num': image.num
+				'num': image.num, 
+				'orderby': image.orderby
 			}; 
 			
 			// freeze the ul 
-			recommendationsApp.freeze(); 
+			recommendationsApp.freeze();
 			
+			// call the clear method to empty the ul 
 			recommendationsApp.clear(); 
 			
 			// the post request
@@ -108,6 +116,7 @@
 					$.each( response, function( index, post ) { 
 						recommendationsApp.make( post );
 					}); 
+					load.hide();  
 				},
 				'json'
 			);

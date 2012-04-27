@@ -1,13 +1,28 @@
 <?php
 /*
-Plugin Name: WP Recommendations
-Plugin URI: 
-Description: Give your visitors more things to see. 
+Plugin Name: Post Recommendations for WordPress
+Plugin URI: http://oldmill1.github.com/post-recommendations-for-wordpress/
+Description: Give your visitors more posts to see. 
 Version: 1.0
 Author: Ankur Taxali
-Author URI: https://github.com/oldmill1
+Author URI: http://oldmill1.github.com/
 License: GPL2
 */
+
+/* 
+		This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/ 
 
 include 'recommendationsApp.php'; 
 
@@ -34,6 +49,7 @@ wp_enqueue_script(
 	TRUE 
 ); 
 
+
 global $app; 
 
 $app = new recommendationsApp(); 
@@ -44,12 +60,7 @@ $tmth_data = array( 'p' => $app->get_timthumb_path() );
 wp_localize_script( 'recommendationsAppJavascript', 'tmth', $tmth_data );
 
 
-/* 
-// sample use (as a template tag) 
-if ( function_exists( 'wp_recommendations' ) ) { 
-	wp_recommendations(); 
-} 
-*/ 
+// template tag 
 function wp_recommendations( $args ) { 
 	global $post; 
 	global $app; 
@@ -59,13 +70,42 @@ function wp_recommendations( $args ) {
 		'size' => null,  
 		'numberposts' => 6, 
 		'orderby' => 'rand', 
-		'show' => TRUE
+		'show' => true
 	);  
 		
 	$args = wp_parse_args( $args, $defaults ); 
 	
 	$app->build_recommendations( $args );  
+	 
 } 
+
+// shortcode 
+function recommend_something_func( $atts ) { 
+	global $post; 
+	
+	extract( shortcode_atts( array(
+			'postID' => $post->ID,
+			'size' => null,  
+			'numberposts' => 6, 
+			'orderby' => 'rand', 
+			'show' => false
+		), $atts ) );
+	
+	$args = array( 
+		'postID' => $postID,
+		'size' => $size,  
+		'numberposts' => $numberposts, 
+		'orderby' => $orderby, 
+		'show' => false
+	); 
+	
+	$app = new recommendationsApp(); 
+	return $app->build_recommendations( $args );  
+}
+
+
+add_shortcode( 'recommend_posts_for_me', 'recommend_something_func' );
+
 
 // define ajaxurl on the front end 
 add_action('wp_head','pluginname_ajaxurl');
@@ -80,10 +120,12 @@ var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
 
 add_action('wp_ajax_get_posts', 'prefix_ajax_get_posts'); 
 
+
+// the main ajax request function
 function prefix_ajax_get_posts() { 
 	global $app; 
 	global $post; 
-	extract( $_POST ); // imports $type, $id, $num 
+	extract( $_POST ); // imports $type, $id, $num, $orderby
 	
 	switch ( $type ) { 
 		case "category": 
@@ -93,7 +135,7 @@ function prefix_ajax_get_posts() {
 			$args = array( 
 				'category__in' => $category_in, 
 				'numberposts' => $num, 
-				'orderby' => 'rand' 
+				'orderby' => $orderby 
 			);
 			
 			$myposts = get_posts( $args ); 

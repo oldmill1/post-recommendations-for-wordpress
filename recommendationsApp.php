@@ -100,18 +100,18 @@ class recommendationsApp {
 		
 		$this->num = $numberposts;
 		
-		$image_data = array( 'size' => $this->size, 'num' => $this->num );
+		$image_data = array( 'size' => $this->size, 'num' => $this->num, 'orderby' => $orderby );
 		wp_localize_script( 'recommendationsAppJavascript', 'image', $image_data ); 
 		
 		
 		$relatedposts = get_posts( $args );
 		$build .= "<div class='wp-recommendations'>"; 
-		$build .= "<div class='well'><form method='POST' action='{$this->api}' id='wp-recommendations-form'>"; 
+		$build .= "<div class='protective-well'><form method='POST' action='{$this->api}' id='wp-recommendations-form'>"; 
 		$build .= "<select name='wp-recommendations-form-options-type'>";
 		$build .= "<option value='category' id='".implode(',', $category_in)."'>More on this Topic</option>";  
 		$build .= "<option value='author' id='{$post->post_author}'>More by this Author</option>";
 		$build .= "</select>"; 
-		$build .= "</form></div>";  
+		$build .= "</form><img class='load' src='".plugins_url( 'images/load.gif', __FILE__ )."' /></div>";  
 		$build .= "<ul>"; 
 		foreach ( $relatedposts as $post ) : 
 			setup_postdata( $post ); 
@@ -125,8 +125,14 @@ class recommendationsApp {
 		$build .= "</ul>"; 
 		$build .= "</div>"; 
 		
-		if ( $show ) 
-			echo $build; 
+		if ( $show ) {
+			echo $build;
+			return true; 
+		} else {
+			return $build;
+		}
+		 
+			
 	} 
 	
 	
