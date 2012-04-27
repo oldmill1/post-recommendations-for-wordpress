@@ -84,7 +84,7 @@ function recommend_something_func( $atts ) {
 	global $post; 
 	
 	extract( shortcode_atts( array(
-			'postID' => $post->ID,
+			'post_id' => $post->ID,
 			'size' => null,  
 			'numberposts' => 6, 
 			'orderby' => 'rand', 
@@ -92,7 +92,7 @@ function recommend_something_func( $atts ) {
 		), $atts ) );
 	
 	$args = array( 
-		'postID' => $postID,
+		'postID' => $post_id,
 		'size' => $size,  
 		'numberposts' => $numberposts, 
 		'orderby' => $orderby, 

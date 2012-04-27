@@ -80,6 +80,10 @@ class recommendationsApp {
 			$postID = $post->ID; 
 		}
 		
+		// we're trying to get the author id of the post being requested 
+		$requested_post = get_post($postID); 
+		$the_author_id = $requested_post->post_author; 
+		
 		$categories = get_the_category($postID);
 		
 		foreach ( $categories as $category ) { 
@@ -106,10 +110,10 @@ class recommendationsApp {
 		
 		$relatedposts = get_posts( $args );
 		$build .= "<div class='wp-recommendations'>"; 
-		$build .= "<div class='protective-well'><form method='POST' action='{$this->api}' id='wp-recommendations-form'>"; 
+		$build .= "<div class='protective-well'><form method='POST' action='/' id='wp-recommendations-form'>"; 
 		$build .= "<select name='wp-recommendations-form-options-type'>";
 		$build .= "<option value='category' id='".implode(',', $category_in)."'>More on this Topic</option>";  
-		$build .= "<option value='author' id='{$post->post_author}'>More by this Author</option>";
+		$build .= "<option value='author' id='{$the_author_id}'>More by this Author</option>";
 		$build .= "</select>"; 
 		$build .= "</form><img class='load' src='".plugins_url( 'images/load.gif', __FILE__ )."' /></div>";  
 		$build .= "<ul>"; 
