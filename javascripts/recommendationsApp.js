@@ -85,13 +85,11 @@
 		function(event) { 
 			event.preventDefault(); 
 			
-			
 			load.show(); 
 			
 			// discover what's being requested
 			var selected = select.val(); 
 			var selObj = select.find("option[value='"+selected+"']");
-		
 			
 			// the data object
 			var data = { 
@@ -101,7 +99,7 @@
 				'num': image.num, 
 				'orderby': image.orderby
 			}; 
-			
+						
 			// freeze the ul 
 			recommendationsApp.freeze();
 			
