@@ -107,7 +107,6 @@ class recommendationsApp {
 		$image_data = array( 'size' => $this->size, 'num' => $this->num, 'orderby' => $orderby );
 		wp_localize_script( 'recommendationsAppJavascript', 'image', $image_data ); 
 		
-		
 		$relatedposts = get_posts( $args );
 		$build .= "<div class='wp-recommendations'>"; 
 		$build .= "<div class='protective-well'><form method='POST' action='/' id='wp-recommendations-form'>"; 
@@ -123,7 +122,7 @@ class recommendationsApp {
 			$link = get_permalink(); 
 			$build .= "<li>"; 
 			$build .= $this->build_image( $this->get_image($post->ID), $size ); 
-			$build .= "<div class='wp-recommendations-meta'><h6><a href='{$link}'>{$title}</a></h6></div>"; 
+			$build .= "<div class='wp-recommendations-meta'><h6><a href='$link'>{$title}</a></h6></div>"; 
 			$build .= "</li>"; 
 		endforeach;
 		$build .= "</ul>"; 

@@ -130,8 +130,9 @@ img.load {
 }
 
 
-
-
+.wp-recommendations-meta h6 a {
+	color: #999 !important;
+}
 
 
 

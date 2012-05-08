@@ -2,15 +2,17 @@
 	// cache
 	var wrapper = $('.wp-recommendations ul'); 
 	var posts = $('.wp-recommendations ul li'); 
-	var titles = $('.wp-recommendations-meta h6'); 
 	
 	var form = $('#wp-recommendations-form'); 
 	var select = $('#wp-recommendations-form select'); 
 	
 	var load = $('img.load'); 
 	
-	var recommendationsApp = {
-		init: function() { 
+	var recommendationsApp = { 
+		fixCaptions: function() { 
+			console.log("called"); 
+			var titles = $('.wp-recommendations-meta h6 a'); 
+			console.log(titles); 
 			titles.addClass('wp-recommendations-meta-surpress'); 
 			
 			titles.each ( function() { 
@@ -19,7 +21,7 @@
 					$(this).attr('id', $(this).text() ); 
 					var new_text = $(this).text().substr( 0, 27 ); 
 					$(this).text(new_text + "..."); 
-				} 
+				} 	
 			}); 
 		},
 		
@@ -32,11 +34,17 @@
 			var newElement = $("<li></li>").prependTo(wrapper); 
 			var src = encodeURI ( tmth.p + "?src=" + post.imgsrc + "&w=" + image.size[0] + "&h=" + image.size[1] ); 	
 			
+			var title_len = parseInt(post.title.length);
+			 
+			if ( title_len > 27 ) { 
+				var title_id = post.title; 
+				var new_text = post.title.substr( 0, 27 ); 
+				var elipse = new_text + "...";
+			} 	
+			
 			newElement.append(
-				"<div class='wp-recommendations-meta'><h6 class='wp-recommendations-meta-surpress'><a href='"+post.link+"'>"+post.title+"</a></h6></div>"
+				"<div class='wp-recommendations-meta'><h6><a class='wp-recommendations-meta-surpress' id='"+post.title+"' href='"+post.link+"'>"+elipse+"</a></h6></div>"
 			); 
-			
-			
 			
 			var img = $("<img class='thumbnail' />").attr( 'src', src )
 														.load( function() { 
@@ -50,32 +58,35 @@
 	
 	}; //recommendationsApp
 	
-	recommendationsApp.init(); 
+	recommendationsApp.fixCaptions(); 
 	
-	posts.hover( 
-		function() { 
-			var text_node = $(this).find('h6'); 
-			var excerpt = text_node.text();
-			
-			text_node.removeClass('wp-recommendations-meta-surpress');
-			 
-			if ( text_node.attr('id') != undefined ) { 
-				text_node.text( text_node.attr('id') ); 
-				text_node.attr('id', excerpt );  
-			}  
-		}, 
-		function() { 
-			$(this).find('h6').addClass('wp-recommendations-meta-surpress'); 
-			
-			var text_node = $(this).find('h6')
-			var full_text = text_node.text(); 
-			
-			if ( text_node.attr('id') != undefined ) { 
-				text_node.text( text_node.attr('id') ); 
-				text_node.attr('id', full_text );  
-			}  
-		}
-	); // posts.hover()
+	$(".wp-recommendations ul li").live({ 
+			mouseenter: 
+				function() { 
+					var text_node = $(this).find('h6 a'); 
+					var excerpt = text_node.text();
+					
+					text_node.removeClass('wp-recommendations-meta-surpress');
+					 
+					if ( text_node.attr('id') != undefined ) { 
+						text_node.text( text_node.attr('id') ); 
+						text_node.attr('id', excerpt );  
+					}  
+				}, 
+			mouseleave: 
+				function() { 
+					$(this).find('h6 a').addClass('wp-recommendations-meta-surpress'); 
+					
+					var text_node = $(this).find('h6 a')
+					var full_text = text_node.text(); 
+					
+					if ( text_node.attr('id') != undefined ) { 
+						text_node.text( text_node.attr('id') ); 
+						text_node.attr('id', full_text );  
+					}  
+				}
+		} 
+	);
 	
 	select.change( function() { 
 		form.submit(); 
@@ -117,7 +128,7 @@
 					load.hide();  
 				},
 				'json'
-			);	
+			);			
 		}
 	); // form.submit()
 	
