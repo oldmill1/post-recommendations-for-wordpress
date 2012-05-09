@@ -40,12 +40,16 @@
 				var title_id = post.title; 
 				var new_text = post.title.substr( 0, 27 ); 
 				var elipse = new_text + "...";
+				newElement.append(
+					"<div class='wp-recommendations-meta'><h6><a class='wp-recommendations-meta-surpress' id='"+post.title+"' href='"+post.link+"'>"+elipse+"</a></h6></div>"
+				); 
+				
+			} else { 
+				newElement.append(
+					"<div class='wp-recommendations-meta'><h6><a class='' href='"+post.link+"'>"+post.title+"</a></h6></div>"
+				); 
 			} 	
-			
-			newElement.append(
-				"<div class='wp-recommendations-meta'><h6><a class='wp-recommendations-meta-surpress' id='"+post.title+"' href='"+post.link+"'>"+elipse+"</a></h6></div>"
-			); 
-			
+	
 			var img = $("<img class='thumbnail' />").attr( 'src', src )
 														.load( function() { 
 															newElement.prepend(img); 			
